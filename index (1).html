@@ -1,46 +1,701 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#9b5428"><title>Spin The Bottle VF</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#a96532">
+<title>Spin The Bottle VF 1.1</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 <style>
-:root{--wood:#bd7a43;--gold:#f6cf79;--ink:#2a1710;--paper:#f2e4ce}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Arial,sans-serif;background:#18232d;color:#fff;overflow:hidden}.app{height:100dvh;display:grid;grid-template-columns:66px minmax(0,1fr) minmax(250px,22%);background:#18232d}.toolbar{background:linear-gradient(#d58b45,#a85c2b);display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 6px;z-index:3}.tool{width:48px;height:48px;border:1px solid #ffe0a5aa;border-radius:50%;background:#f2b45d88;color:white;font-size:23px;display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 5px #4b210f66}.tool:active{transform:scale(.94)}.spacer{flex:1}.board{position:relative;overflow:hidden;min-width:0;background-color:#b97640;background-image:repeating-linear-gradient(0deg,transparent 0 58px,#8b4d2b22 59px,#f4c08033 61px),linear-gradient(100deg,#c8874b,#b66d39 55%,#d18a4c)}.board:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,#f4bd6a22,transparent 65%),repeating-linear-gradient(90deg,transparent 0 150px,#7b3e1e12 151px,#f6c17a22 153px);pointer-events:none}.board-title{position:absolute;top:10px;left:16px;font-weight:900;text-shadow:0 1px 2px #66351666}.heart{position:absolute;top:12px;left:15px;font-size:35px;color:#fff;filter:drop-shadow(0 2px 1px #75351c)}.likes{position:absolute;top:55px;left:20px;font-weight:bold}.player{position:absolute;width:clamp(70px,12vw,130px);aspect-ratio:1/1.12;background:#21150f;border:4px solid #f3c878;border-radius:12px;box-shadow:0 4px 8px #50280f88,0 0 0 2px #8b4a25;overflow:visible;cursor:pointer;z-index:1}.player .pic{width:100%;height:100%;display:grid;place-items:center;font-size:42px;background:linear-gradient(145deg,#e9c69c,#80624c);border-radius:7px;overflow:hidden}.player .pic img{width:100%;height:100%;object-fit:cover}.player .name{position:absolute;bottom:-20px;left:0;right:0;text-align:center;font-size:11px;font-weight:bold;color:#1020a4;text-shadow:0 1px #f8dca6;white-space:nowrap;overflow:hidden}.player .num{position:absolute;right:-9px;top:-10px;background:#e34d43;color:#fff;border-radius:20px;min-width:23px;height:23px;padding:3px 5px;text-align:center;font-size:12px;font-weight:bold;border:1px solid #ffd9a1}.p1{left:15%;top:13%}.p2{left:39%;top:7%}.p3{right:8%;top:14%}.p4{left:7%;top:40%}.p5{left:38%;top:41%}.p6{right:8%;top:43%}.p7{left:12%;bottom:9%}.p8{right:10%;bottom:8%}.center-prompt{position:absolute;left:50%;top:39%;transform:translateX(-50%);width:min(60%,380px);text-align:center;color:#fff;text-shadow:0 2px 3px #703719;font-weight:900;font-size:clamp(17px,2.5vw,27px);z-index:2;pointer-events:none}.bottle-wrap{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:clamp(100px,17vw,175px);height:clamp(100px,17vw,175px);display:grid;place-items:center;z-index:3}.bottle{width:78%;height:78%;filter:drop-shadow(0 8px 5px #4c251c88);transition:transform 3.4s cubic-bezier(.12,.78,.13,1)}.spinbtn{position:absolute;left:50%;bottom:13px;transform:translateX(-50%);border:2px solid #ffe2a5;background:linear-gradient(#e4a65b,#a94f2a);color:white;border-radius:28px;padding:10px 23px;font-weight:900;cursor:pointer;z-index:4}.chat{background:#eeeae2;color:#332b26;display:flex;flex-direction:column;min-width:0;overflow:hidden}.chat-head{height:42px;background:#d7d0c5;padding:13px;font-weight:bold;font-size:13px}.song{height:112px;background:linear-gradient(120deg,#171717,#4d403a);color:#fff;padding:12px;display:flex;gap:10px;align-items:center}.cover{width:65px;height:65px;border-radius:5px;background:linear-gradient(135deg,#40312b,#bd7b50);display:grid;place-items:center;font-size:30px}.song strong{font-size:12px}.song small{display:block;color:#ddd;margin-top:6px}.messages{flex:1;overflow:auto;padding:8px;background:#f3f0eb}.msg{padding:7px;margin:4px 0;background:white;border-radius:10px;font-size:12px;overflow-wrap:anywhere}.msg b{color:#174baf}.composer{display:flex;padding:7px;gap:5px;background:#f4f1eb}.composer input{min-width:0;flex:1;border:1px solid #c8c0b6;border-radius:20px;padding:10px;font-size:13px}.composer button{border:0;border-radius:50%;width:38px;background:#bd7945;color:#fff;font-size:18px}.toast{position:absolute;left:50%;top:12px;transform:translateX(-50%);background:#281a12eF;color:#fff;padding:9px 15px;border-radius:18px;font-size:12px;z-index:10;display:none}.modal{position:absolute;inset:0;background:#0009;z-index:8;display:none;align-items:center;justify-content:center;padding:16px}.panel{width:min(440px,100%);max-height:85%;overflow:auto;background:#fff8ed;color:#2a1710;border-radius:15px;padding:18px;box-shadow:0 10px 40px #0008}.panel h2{margin:0 0 12px}.panel input,.panel select{width:100%;padding:11px;margin:5px 0;border:1px solid #c9a77b;border-radius:8px}.action{border:0;border-radius:9px;padding:10px 14px;margin:5px 3px;background:#a85c2b;color:white;font-weight:bold}.muted{font-size:12px;color:#6b5b4b}.rowline{padding:8px 0;border-bottom:1px solid #dfcfb8}
-@media(max-width:700px){.app{grid-template-columns:48px minmax(0,1fr);grid-template-rows:minmax(0,1fr) 32vh}.toolbar{grid-row:1/3;gap:8px;padding:8px 4px}.tool{width:38px;height:38px;font-size:19px}.board{grid-column:2;grid-row:1}.chat{grid-column:2;grid-row:2;border-top:3px solid #d5a15f}.player{width:clamp(52px,17vw,88px);border-width:3px}.p1{left:7%;top:15%}.p2{left:39%;top:6%}.p3{right:4%;top:15%}.p4{left:3%;top:43%}.p5{left:39%;top:43%}.p6{right:4%;top:45%}.p7{left:7%;bottom:9%}.p8{right:7%;bottom:8%}.center-prompt{top:33%;width:72%;font-size:14px}.bottle-wrap{top:58%;width:95px;height:95px}.spinbtn{bottom:5px;padding:7px 15px;font-size:11px}.song{height:55px;padding:5px}.cover{width:42px;height:42px;font-size:20px}.chat-head{height:27px;padding:7px}.messages{padding:4px}.msg{padding:5px;font-size:11px}.composer{padding:4px}.composer input{padding:7px}}
-</style></head>
-<body><div class="app"><nav class="toolbar">
-<button class="tool" onclick="toast('Yoqtirish')">♡</button><button class="tool" onclick="openShop()">▤</button><button class="tool" onclick="spin()">◉</button><button class="tool" onclick="openRoomDialog()">#</button><button class="tool" onclick="openMenu()">☰</button><div class="spacer"></div><button class="tool" onclick="openSettings()">⚙</button><button class="tool" onclick="leaveRoom()">⇥</button><button class="tool" onclick="refreshRoom()">⟳</button>
-</nav><main class="board"><div class="board-title">Spin The Bottle VF</div><div class="heart">♥</div><div class="likes" id="playerCount">0</div><div id="players"></div><div class="center-prompt" id="prompt">Xonaga qo‘shiling yoki xona yarating</div><div class="bottle-wrap"><svg class="bottle" id="bottle" viewBox="0 0 180 180"><defs><linearGradient id="glass" x1="0" x2="1"><stop stop-color="#a7e5a2"/><stop offset=".45" stop-color="#eaffd4"/><stop offset="1" stop-color="#4a9d62"/></linearGradient></defs><g transform="translate(90 90)"><path d="M-13 -78 L13 -78 L13 -48 Q13 -38 28 -25 L37 -12 Q43 0 37 15 L-37 15 Q-43 0 -37 -12 L-28 -25 Q-13 -38 -13 -48Z" fill="url(#glass)" stroke="#28633c" stroke-width="4"/><rect x="-15" y="-91" width="30" height="14" rx="3" fill="#d8bd74" stroke="#76542c" stroke-width="3"/><path d="M-27 2 Q0 -8 27 2 L33 13 L-33 13Z" fill="#55a66a" opacity=".75"/><path d="M-5 -67 L-5 -31" stroke="#fff" stroke-width="4" opacity=".7" stroke-linecap="round"/></g></svg></div><button class="spinbtn" onclick="spin()">AYLANTIRISH</button><div class="toast" id="toast"></div></main>
-<aside class="chat"><div class="chat-head">O‘YIN CHAT <span id="roomLabel" style="float:right">Xona yo‘q</span></div><div class="song"><div class="cover">🎵</div><div><strong>Spin The Bottle VF</strong><small>O‘yin musiqasi</small></div></div><div class="messages" id="messages"><div class="msg">Xonaga kirganingizdan keyin chat ochiladi.</div></div><form class="composer" onsubmit="sendMsg(event)"><input id="chatInput" placeholder="Xabar yozish…" autocomplete="off"><button>➤</button></form></aside></div>
-<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="panel" id="panel"></div></div>
+:root {
+  --wood:#bd7943;
+  --gold:#f6cf79;
+}
+* {box-sizing:border-box}
+html,body {
+  margin:0;width:100%;height:100%;
+  font-family:Arial,sans-serif;
+  background:#17232d;color:white;overflow:hidden;
+}
+button,input {font:inherit}
+.app {
+  height:100dvh;
+  display:grid;
+  grid-template-columns:66px minmax(0,1fr) minmax(245px,25%);
+  background:#17232d;
+}
+.toolbar {
+  background:linear-gradient(180deg,#d18a45,#a85b2b);
+  display:flex;flex-direction:column;
+  align-items:center;gap:10px;padding:10px 6px;
+}
+.tool {
+  width:48px;height:48px;border:1px solid #ffe0a5aa;
+  border-radius:50%;background:#f0b15c88;color:white;
+  font-size:23px;display:grid;place-items:center;
+  cursor:pointer;box-shadow:0 2px 5px #4b210f66;
+}
+.tool:active {transform:scale(.94)}
+.spacer {flex:1}
+.board {
+  position:relative;overflow:hidden;min-width:0;
+  background-color:#b97640;
+  background-image:
+  repeating-linear-gradient(0deg,transparent 0 58px,#8b4d2b22 59px,#f4c08033 61px),
+  linear-gradient(100deg,#c8874b,#b66d39 55%,#d18a4c);
+}
+.board:before {
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,#f4bd6a30,transparent 66%);
+  pointer-events:none;
+}
+.board-title {
+  position:absolute;top:10px;left:16px;
+  font-weight:900;font-size:16px;
+}
+.heart {
+  position:absolute;top:10px;left:13px;
+  font-size:37px;color:white;
+}
+.likes {
+  position:absolute;top:55px;left:21px;
+  font-weight:bold;font-size:14px;
+}
+.player {
+  position:absolute;width:clamp(72px,12vw,130px);
+  aspect-ratio:1/1.12;background:#21150f;
+  border:4px solid #f3c878;border-radius:12px;
+  box-shadow:0 4px 8px #50280f88;
+  overflow:visible;cursor:pointer;z-index:1;
+}
+.player .pic {
+  width:100%;height:100%;display:grid;
+  place-items:center;font-size:42px;
+  background:linear-gradient(145deg,#e9c69c,#80624c);
+  border-radius:7px;overflow:hidden;
+}
+.player .pic img {width:100%;height:100%;object-fit:cover}
+.player .name {
+  position:absolute;bottom:-20px;left:-8px;right:-8px;
+  text-align:center;font-size:11px;font-weight:bold;
+  color:#1020a4;text-shadow:0 1px #f8dca6;
+  white-space:nowrap;overflow:hidden;
+}
+.player .num {
+  position:absolute;right:-9px;top:-10px;
+  background:#e34d43;color:white;border-radius:20px;
+  min-width:23px;height:23px;padding:3px 5px;
+  text-align:center;font-size:12px;font-weight:bold;
+}
+.player .crown {
+  position:absolute;top:-20px;left:-9px;font-size:25px;
+}
+.p1 {left:15%;top:14%}
+.p2 {left:39%;top:7%}
+.p3 {right:8%;top:14%}
+.p4 {left:7%;top:40%}
+.p5 {left:38%;top:41%}
+.p6 {right:8%;top:43%}
+.p7 {left:12%;bottom:9%}
+.p8 {right:10%;bottom:8%}
+.center-prompt {
+  position:absolute;left:50%;top:40%;
+  transform:translateX(-50%);
+  width:min(60%,380px);text-align:center;
+  color:white;text-shadow:0 2px 3px #703719;
+  font-weight:900;font-size:clamp(17px,2.5vw,27px);
+  z-index:2;pointer-events:none;
+}
+.bottle-wrap {
+  position:absolute;left:50%;top:57%;
+  transform:translate(-50%,-50%);
+  width:clamp(105px,18vw,180px);
+  height:clamp(105px,18vw,180px);
+  display:grid;place-items:center;z-index:3;
+}
+.bottle {
+  width:78%;height:78%;
+  filter:drop-shadow(0 8px 5px #4c251c88);
+  transition:transform 3.5s cubic-bezier(.12,.78,.13,1);
+}
+.spinbtn {
+  position:absolute;left:50%;bottom:12px;
+  transform:translateX(-50%);
+  border:2px solid #ffe2a5;
+  background:linear-gradient(#e4a65b,#a94f2a);
+  color:white;border-radius:28px;padding:9px 22px;
+  font-weight:900;cursor:pointer;z-index:4;
+}
+.chat {
+  background:#eeeae2;color:#332b26;
+  display:flex;flex-direction:column;
+  min-width:0;overflow:hidden;
+}
+.chat-head {
+  height:42px;background:#d7d0c5;
+  padding:13px;font-weight:bold;font-size:13px;
+}
+.song {
+  height:130px;background:linear-gradient(120deg,#171717,#4d403a);
+  color:white;padding:12px;display:flex;gap:10px;
+  align-items:center;
+}
+.cover {
+  width:82px;height:82px;border-radius:5px;
+  background:linear-gradient(135deg,#40312b,#bd7b50);
+  display:grid;place-items:center;font-size:34px;
+}
+.song strong {font-size:13px}
+.song small {display:block;color:#ddd;margin-top:6px}
+.messages {
+  flex:1;overflow:auto;padding:8px;background:#f3f0eb;
+}
+.msg {
+  display:flex;gap:7px;align-items:flex-start;
+  padding:7px;margin:4px 0;background:white;
+  border-radius:9px;font-size:12px;overflow-wrap:anywhere;
+}
+.msg .avatar {
+  width:28px;height:28px;flex:none;
+  border-radius:5px;background:#d4c9b8;
+  display:grid;place-items:center;
+}
+.msg b {color:#174baf}
+.composer {
+  display:flex;padding:7px;gap:5px;
+  background:#f4f1eb;
+}
+.composer input {
+  min-width:0;flex:1;border:1px solid #c8c0b6;
+  border-radius:20px;padding:10px;font-size:13px;
+}
+.composer button {
+  border:0;border-radius:50%;width:38px;
+  background:#bd7945;color:white;font-size:18px;
+}
+.toast {
+  position:absolute;left:50%;top:12px;
+  transform:translateX(-50%);
+  background:#281a12ed;color:white;
+  padding:9px 15px;border-radius:18px;
+  font-size:12px;z-index:12;display:none;
+}
+.modal {
+  position:absolute;inset:0;background:#0009;
+  z-index:10;display:none;
+  align-items:center;justify-content:center;padding:16px;
+}
+.panel {
+  width:min(460px,100%);max-height:86%;
+  overflow:auto;background:#fff8ed;color:#2a1710;
+  border-radius:15px;padding:18px;
+}
+.panel h2 {margin:0 0 12px}
+.panel input {
+  width:100%;padding:11px;margin:5px 0;
+  border:1px solid #c9a77b;border-radius:8px;
+}
+.action {
+  border:0;border-radius:9px;padding:10px 14px;
+  margin:5px 3px;background:#a85c2b;
+  color:white;font-weight:bold;cursor:pointer;
+}
+.rowline {
+  padding:8px 0;border-bottom:1px solid #dfcfb8;
+}
+@media(max-width:700px) {
+  .app {
+    grid-template-columns:48px minmax(0,1fr);
+    grid-template-rows:minmax(0,1fr) 32vh;
+  }
+  .toolbar {
+    grid-row:1/3;gap:8px;padding:8px 4px;
+  }
+  .tool {width:38px;height:38px;font-size:19px}
+  .board {grid-column:2;grid-row:1}
+  .chat {
+    grid-column:2;grid-row:2;
+    border-top:3px solid #d5a15f;
+  }
+  .player {width:clamp(52px,17vw,88px);border-width:3px}
+  .p1 {left:7%;top:15%}
+  .p2 {left:39%;top:6%}
+  .p3 {right:4%;top:15%}
+  .p4 {left:3%;top:43%}
+  .p5 {left:39%;top:43%}
+  .p6 {right:4%;top:45%}
+  .p7 {left:7%;bottom:9%}
+  .p8 {right:7%;bottom:8%}
+  .center-prompt {top:34%;width:72%;font-size:14px}
+  .bottle-wrap {top:59%;width:95px;height:95px}
+  .spinbtn {bottom:5px;padding:7px 15px;font-size:11px}
+  .song {height:54px;padding:5px}
+  .cover {width:42px;height:42px;font-size:20px}
+  .chat-head {height:27px;padding:7px}
+  .messages {padding:4px}
+  .msg {padding:5px;font-size:11px}
+  .composer {padding:4px}
+  .composer input {padding:7px}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<nav class="toolbar">
+ <button class="tool" onclick="toast('Yoqtirildi')">♡</button>
+ <button class="tool" onclick="openShop()">🎁</button>
+ <button class="tool" onclick="spin()">◉</button>
+ <button class="tool" onclick="toast('Reyting keyingi yangilanishda')">🏆</button>
+ <button class="tool" onclick="openMenu()">☰</button>
+ <div class="spacer"></div>
+ <button class="tool" onclick="openSettings()">⚙</button>
+ <button class="tool" onclick="leaveRoom()">⇥</button>
+ <button class="tool" onclick="refreshRoom()">⟳</button>
+</nav>
+
+<main class="board">
+ <div class="board-title">Spin The Bottle VF</div>
+ <div class="heart">♥</div>
+ <div class="likes" id="playerCount">0</div>
+ <div id="players"></div>
+
+ <div class="center-prompt" id="prompt">
+ Xonaga qo‘shiling yoki yangi xona yarating
+ </div>
+
+ <div class="bottle-wrap">
+  <svg class="bottle" id="bottle" viewBox="0 0 180 180">
+   <defs>
+    <linearGradient id="glass" x1="0" x2="1">
+     <stop stop-color="#398c35"/>
+     <stop offset=".45" stop-color="#a9d86b"/>
+     <stop offset="1" stop-color="#286c2d"/>
+    </linearGradient>
+   </defs>
+   <g transform="translate(90 90)">
+    <path d="M-13 -78 L13 -78 L13 -48 Q13 -38 28 -25 L37 -12 Q43 0 37 15 L-37 15 Q-43 0 -37 -12 L-28 -25 Q-13 -38 -13 -48Z"
+     fill="url(#glass)" stroke="#28633c" stroke-width="4"/>
+    <rect x="-15" y="-91" width="30" height="14" rx="3"
+     fill="#d8bd74" stroke="#76542c" stroke-width="3"/>
+    <path d="M-27 2 Q0 -8 27 2 L33 13 L-33 13Z"
+     fill="#55a66a" opacity=".75"/>
+    <path d="M-5 -67 L-5 -31" stroke="white"
+     stroke-width="4" opacity=".7" stroke-linecap="round"/>
+   </g>
+  </svg>
+ </div>
+
+ <button class="spinbtn" onclick="spin()">AYLANTIRISH</button>
+ <div class="toast" id="toast"></div>
+</main>
+
+<aside class="chat">
+ <div class="chat-head">
+  O‘YIN CHAT
+  <span id="roomLabel" style="float:right">Xona yo‘q</span>
+ </div>
+ <div class="song">
+  <div class="cover">🎵</div>
+  <div>
+   <strong>SPIN THE BOTTLE VF</strong>
+   <small>O‘yin musiqasi uchun joy</small>
+  </div>
+ </div>
+ <div class="messages" id="messages">
+  <div class="msg">Xonaga kirganingizdan keyin chat ochiladi.</div>
+ </div>
+ <form class="composer" onsubmit="sendMsg(event)">
+  <input id="chatInput" placeholder="Xabar yozish…" autocomplete="off">
+  <button>➤</button>
+ </form>
+</aside>
+</div>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+ <div class="panel" id="panel"></div>
+</div>
+
 <script>
 const API='https://vghgqdoevmrwlqeomswn.supabase.co/functions/v1/spin-bottle-api';
-const tg=window.Telegram?.WebApp;try{tg?.ready();tg?.expand();}catch(e){}
-let room=null,me=null,players=[],angle=0,poll=null;
-function toast(t){const x=document.getElementById('toast');x.textContent=t;x.style.display='block';clearTimeout(window.tt);window.tt=setTimeout(()=>x.style.display='none',2600)}
-async function api(action,data={}){const initData=tg?.initData||'';const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json','x-telegram-init-data':initData},body:JSON.stringify({action,...data})});const j=await r.json();if(!r.ok||j.success===false)throw new Error(j.error||'Xatolik');return j}
-function openModal(html){document.getElementById('panel').innerHTML=html;document.getElementById('modal').style.display='flex'}function closeModal(){document.getElementById('modal').style.display='none'}
-function openRoomDialog(){openModal(`<h2>O‘yin xonasi</h2><button class="action" onclick="createRoom()">Yangi xona yaratish</button><hr><input id="roomCode" placeholder="6 xonali xona kodi"><button class="action" onclick="joinRoom()">Xonaga kirish</button><p class="muted">Xonani yaratganingizdan so‘ng kodni do‘stlaringizga yuboring.</p>`)}
-async function createRoom(){try{const j=await api('create_room',{game_mode:'both'});room=j.room;closeModal();toast('Xona yaratildi: '+room.room_code);await refreshRoom();startPolling()}catch(e){toast(e.message)}}
-async function joinRoom(){try{const code=document.getElementById('roomCode').value.trim();if(!/^\d{6}$/.test(code))return toast('6 xonali kod kiriting');const j=await api('join_room',{room_code:code});room=j.room;closeModal();toast('Xonaga qo‘shildingiz');await refreshRoom();startPolling()}catch(e){toast(e.message)}}
-async function refreshRoom(){if(!room)return;try{const j=await api('get_room',{room_id:room.id});room=j.room;players=j.players||[];renderPlayers();renderMessages(j.messages||[])}catch(e){toast(e.message)}}
-function renderPlayers(){document.getElementById('playerCount').textContent=players.length;document.getElementById('roomLabel').textContent=room?'#'+room.room_code:'Xona yo‘q';const root=document.getElementById('players');root.innerHTML='';const positions=['p1','p2','p3','p4','p5','p6','p7','p8'];players.forEach((p,i)=>{const d=document.createElement('div');d.className='player '+positions[i%8];const pic=document.createElement('div');pic.className='pic';if(p.avatar_url){const img=document.createElement('img');img.src=p.avatar_url;pic.append(img)}else pic.textContent='👤';const name=document.createElement('div');name.className='name';name.textContent=p.display_name||'Player';const num=document.createElement('span');num.className='num';num.textContent=p.is_ready?'✓':String(i+1);d.append(pic,num,name);d.onclick=()=>{document.getElementById('prompt').textContent=p.display_name};root.append(d)})}
-function renderMessages(list){const root=document.getElementById('messages');root.innerHTML='';list.forEach(m=>{const d=document.createElement('div');d.className='msg';const b=document.createElement('b');b.textContent=(m.display_name||'Player')+': ';d.append(b,document.createTextNode(m.message||''));root.append(d)});root.scrollTop=root.scrollHeight}
-async function sendMsg(e){e.preventDefault();const input=document.getElementById('chatInput');const message=input.value.trim();if(!message)return;if(!room)return toast('Avval xonaga kiring');try{await api('send_message',{room_id:room.id,message});input.value='';await refreshRoom()}catch(e){toast(e.message)}}
-function startPolling(){if(poll)clearInterval(poll);poll=setInterval(refreshRoom,2500)}
-async function leaveRoom(){if(!room)return toast('Siz xonada emassiz');try{await api('leave_room',{room_id:room.id});room=null;players=[];if(poll)clearInterval(poll);renderPlayers();document.getElementById('roomLabel').textContent='Xona yo‘q';toast('Xonadan chiqdingiz')}catch(e){toast(e.message)}}
-function spin(){if(players.length<2)return toast('Aylantirish uchun kamida 2 o‘yinchi kerak');const b=document.getElementById('bottle');angle+=1440+Math.floor(Math.random()*360);b.style.transform=`rotate(${angle}deg)`;toast('Shisha aylanmoqda…');setTimeout(()=>{const p=players[Math.floor(Math.random()*players.length)];document.getElementById('prompt').textContent='Navbat: '+p.display_name},3500)}
-function openMenu(){openModal(`<h2>Menyu</h2><button class="action" onclick="openRoomDialog()">Xona yaratish / kirish</button><button class="action" onclick="readyToggle()">Tayyorman</button><button class="action" onclick="ownerPanel()">OWNER panel</button>`)}
-async function readyToggle(){closeModal();if(!room)return toast('Avval xonaga kiring');try{await api('ready',{room_id:room.id,is_ready:true});await refreshRoom();toast('Tayyor holati yoqildi')}catch(e){toast(e.message)}}
-function openSettings(){openModal(`<h2>Sozlamalar</h2><p>Telegram profili orqali kirish ishlatiladi.</p><button class="action" onclick="ownerPanel()">OWNER boshqaruv paneli</button>`)}
-async function ownerPanel(){try{const j=await api('me');if(!j.is_owner){closeModal();return toast('Bu panel faqat OWNER uchun')};const s=await api('admin_stats');const v=s.statistics||{};openModal(`<h2>OWNER boshqaruvi</h2><p>O‘yin xonalari: ${v.stb_rooms||0}</p><p>O‘yinchilar: ${v.stb_players||0}</p><p>Xabarlar: ${v.stb_messages||0}</p><p>Sovg‘alar: ${v.stb_gifts||0}</p><p>Banlar: ${v.stb_bans||0}</p><button class="action" onclick="adminRooms()">Xonalarni ko‘rish</button><button class="action" onclick="adminBans()">Banlar</button><button class="action" onclick="banForm()">O‘yinchini ban qilish</button>`)}catch(e){toast(e.message)}}
-async function adminRooms(){try{const j=await api('admin_rooms');openModal('<h2>Barcha xonalar</h2>'+((j.rooms||[]).map(r=>`<div class="rowline">#${r.room_code} — ${r.status}<br><button class="action" onclick="closeRoom('${r.id}')">Yopish</button></div>`).join('')||'Xonalar yo‘q'))}catch(e){toast(e.message)}}
-async function closeRoom(id){try{await api('admin_close_room',{room_id:id});toast('Xona yopildi');adminRooms()}catch(e){toast(e.message)}}
-async function adminBans(){try{const j=await api('admin_bans');openModal('<h2>Ban ro‘yxati</h2>'+((j.bans||[]).map(b=>`<div class="rowline">ID: ${b.telegram_user_id}<br>${b.reason||''}<br><button class="action" onclick="unban('${b.telegram_user_id}')">Ban olib tashlash</button></div>`).join('')||'Banlar yo‘q'))}catch(e){toast(e.message)}}
-async function unban(id){try{await api('admin_unban',{telegram_user_id:id});toast('Ban olib tashlandi');adminBans()}catch(e){toast(e.message)}}
-function banForm(){openModal(`<h2>O‘yinchini ban qilish</h2><input id="banId" placeholder="Telegram ID"><input id="banReason" placeholder="Sabab"><button class="action" onclick="banPlayer()">Ban qilish</button>`)}
-async function banPlayer(){try{await api('admin_ban',{telegram_user_id:document.getElementById('banId').value.trim(),reason:document.getElementById('banReason').value.trim()});toast('Ban qo‘yildi');adminBans()}catch(e){toast(e.message)}}
-async function openShop(){try{const j=await api('gifts');openModal('<h2>Sovg‘alar</h2>'+((j.gifts||[]).map(g=>`<div class="rowline">${g.emoji||'🎁'} ${g.name} — ${g.price_coins} coin</div>`).join('')||'Hozircha sovg‘alar yo‘q'))}catch(e){toast(e.message)}}
-(async()=>{if(!tg?.initData){toast('Mini Appni Telegram ichidan oching');return}try{const j=await api('me');me=j.user;if(j.is_owner)toast('OWNER sifatida kirdingiz')}catch(e){toast(e.message)}})();
-</script></body></html>
+const tg=window.Telegram?.WebApp;
+
+try {
+ tg?.ready();
+ tg?.expand();
+ tg?.setHeaderColor?.('#17232d');
+ tg?.setBackgroundColor?.('#17232d');
+} catch(e) {}
+
+let room=null,me=null,players=[],angle=0,poll=null,spinning=false;
+
+function toast(t) {
+ const x=document.getElementById('toast');
+ x.textContent=t;
+ x.style.display='block';
+ clearTimeout(window.toastTimer);
+ window.toastTimer=setTimeout(()=>x.style.display='none',2800);
+}
+
+async function api(action,data={}) {
+ const initData=tg?.initData||'';
+ const r=await fetch(API,{
+  method:'POST',
+  headers:{
+   'Content-Type':'application/json',
+   'x-telegram-init-data':initData
+  },
+  body:JSON.stringify({action,...data})
+ });
+ let j;
+ try {j=await r.json()}
+ catch {throw new Error('Server javobi noto‘g‘ri')}
+ if(!r.ok||j.success===false)
+  throw new Error(j.error||'Xatolik');
+ return j;
+}
+
+function openModal(html) {
+ document.getElementById('panel').innerHTML=html;
+ document.getElementById('modal').style.display='flex';
+}
+function closeModal() {
+ document.getElementById('modal').style.display='none';
+}
+
+function openRoomDialog() {
+ openModal(`
+  <h2>O‘yin xonasi</h2>
+  <button class="action" onclick="createRoom()">＋ Yangi xona yaratish</button>
+  <hr>
+  <input id="roomCode" inputmode="numeric" maxlength="6"
+   placeholder="6 xonali xona kodi">
+  <button class="action" onclick="joinRoom()">Xonaga kirish</button>
+  <p>Xona yaratilgach, kodni do‘stlaringizga yuboring.</p>
+ `);
+}
+
+async function createRoom() {
+ try {
+  const j=await api('create_room',{game_mode:'both'});
+  room=j.room;
+  closeModal();
+  toast('Xona yaratildi: '+room.room_code);
+  await refreshRoom();
+  startPolling();
+ } catch(e) {toast(e.message)}
+}
+
+async function joinRoom() {
+ try {
+  const code=document.getElementById('roomCode').value.trim();
+  if(!/^\d{6}$/.test(code))
+   return toast('6 xonali kod kiriting');
+  const j=await api('join_room',{room_code:code});
+  room=j.room;
+  closeModal();
+  toast('Xonaga qo‘shildingiz');
+  await refreshRoom();
+  startPolling();
+ } catch(e) {toast(e.message)}
+}
+
+async function refreshRoom() {
+ if(!room)return toast('Avval xona yarating yoki unga kiring');
+ try {
+  const j=await api('get_room',{room_id:room.id});
+  room=j.room;
+  players=j.players||[];
+  renderPlayers();
+  renderMessages(j.messages||[]);
+ } catch(e) {toast(e.message)}
+}
+
+function renderPlayers() {
+ document.getElementById('playerCount').textContent=players.length;
+ document.getElementById('roomLabel').textContent=
+  room?'#'+room.room_code:'Xona yo‘q';
+
+ const root=document.getElementById('players');
+ root.innerHTML='';
+ const positions=['p1','p2','p3','p4','p5','p6','p7','p8'];
+
+ players.forEach((p,i)=>{
+  const d=document.createElement('div');
+  d.className='player '+positions[i%8];
+
+  const pic=document.createElement('div');
+  pic.className='pic';
+
+  if(p.avatar_url) {
+   const img=document.createElement('img');
+   img.src=p.avatar_url;
+   img.alt='';
+   pic.append(img);
+  } else {
+   pic.textContent='👤';
+  }
+
+  const name=document.createElement('div');
+  name.className='name';
+  name.textContent=p.display_name||'Player';
+
+  const num=document.createElement('span');
+  num.className='num';
+  num.textContent=p.is_ready?'✓':String(i+1);
+
+  d.append(pic,num,name);
+
+  if(i===0) {
+   const crown=document.createElement('span');
+   crown.className='crown';
+   crown.textContent='👑';
+   d.append(crown);
+  }
+
+  d.onclick=()=>{
+   document.getElementById('prompt').textContent=
+    p.display_name||'O‘yinchi';
+  };
+  root.append(d);
+ });
+}
+
+function renderMessages(list) {
+ const root=document.getElementById('messages');
+ root.innerHTML='';
+
+ if(!list.length) {
+  root.textContent='Hozircha xabar yo‘q.';
+  return;
+ }
+
+ list.forEach(m=>{
+  const d=document.createElement('div');
+  d.className='msg';
+
+  const a=document.createElement('div');
+  a.className='avatar';
+  a.textContent='👤';
+
+  const s=document.createElement('span');
+  const b=document.createElement('b');
+  b.textContent=(m.display_name||'Player')+': ';
+
+  s.append(b,document.createTextNode(m.message||''));
+  d.append(a,s);
+  root.append(d);
+ });
+ root.scrollTop=root.scrollHeight;
+}
+
+async function sendMsg(e) {
+ e.preventDefault();
+ const input=document.getElementById('chatInput');
+ const message=input.value.trim();
+
+ if(!message)return;
+ if(!room)return toast('Avval xonaga kiring');
+
+ try {
+  await api('send_message',{room_id:room.id,message});
+  input.value='';
+  await refreshRoom();
+ } catch(e) {toast(e.message)}
+}
+
+function startPolling() {
+ if(poll)clearInterval(poll);
+ poll=setInterval(()=>{
+  if(room)refreshRoom();
+ },3000);
+}
+
+async function leaveRoom() {
+ if(!room)return toast('Siz xonada emassiz');
+
+ try {
+  await api('leave_room',{room_id:room.id});
+  room=null;
+  players=[];
+  if(poll)clearInterval(poll);
+  renderPlayers();
+
+  document.getElementById('messages').innerHTML=
+   '<div class="msg">Xonaga kirganingizdan keyin chat ochiladi.</div>';
+  document.getElementById('roomLabel').textContent='Xona yo‘q';
+  document.getElementById('prompt').textContent=
+   'Xonaga qo‘shiling yoki yangi xona yarating';
+
+  toast('Xonadan chiqdingiz');
+ } catch(e) {toast(e.message)}
+}
+
+function spin() {
+ if(spinning)return;
+ if(!room)return toast('Avval xonaga kiring');
+ if(players.length<2)
+  return toast('Aylantirish uchun kamida 2 o‘yinchi kerak');
+
+ spinning=true;
+ angle+=1440+Math.floor(Math.random()*360);
+
+ document.getElementById('bottle').style.transform=
+  `rotate(${angle}deg)`;
+
+ toast('Shisha aylanmoqda…');
+
+ setTimeout(()=>{
+  const p=players[Math.floor(Math.random()*players.length)];
+  document.getElementById('prompt').textContent=
+   'Navbat: '+(p.display_name||'O‘yinchi');
+  spinning=false;
+ },3600);
+}
+
+function openMenu() {
+ openModal(`
+  <h2>Menyu</h2>
+  <button class="action" onclick="openRoomDialog()">Xona yaratish / kirish</button>
+  <button class="action" onclick="readyToggle()">Tayyorman</button>
+  <button class="action" onclick="ownerPanel()">OWNER paneli</button>
+ `);
+}
+
+async function readyToggle() {
+ closeModal();
+ if(!room)return toast('Avval xonaga kiring');
+
+ try {
+  await api('ready',{room_id:room.id,is_ready:true});
+  await refreshRoom();
+  toast('Tayyor holati yoqildi');
+ } catch(e) {toast(e.message)}
+}
+
+function openSettings() {
+ openModal(`
+  <h2>Sozlamalar</h2>
+  <p>Telegram profilingiz orqali kirish ishlatiladi.</p>
+  <button class="action" onclick="ownerPanel()">OWNER boshqaruv paneli</button>
+  <button class="action" onclick="openRoomDialog()">Xona yaratish / kirish</button>
+ `);
+}
+
+async function ownerPanel() {
+ try {
+  const j=await api('me');
+
+  if(!j.is_owner) {
+   closeModal();
+   return toast('Bu panel faqat OWNER uchun');
+  }
+
+  const s=await api('admin_stats');
+  const v=s.statistics||{};
+
+  openModal(`
+   <h2>OWNER boshqaruvi</h2>
+   <p>O‘yin xonalari: ${v.stb_rooms||0}</p>
+   <p>O‘yinchilar: ${v.stb_players||0}</p>
+   <p>Xabarlar: ${v.stb_messages||0}</p>
+   <p>Sovg‘alar: ${v.stb_gifts||0}</p>
+   <p>Banlar: ${v.stb_bans||0}</p>
+   <button class="action" onclick="adminRooms()">Xonalarni ko‘rish</button>
+   <button class="action" onclick="adminBans()">Banlar</button>
+   <button class="action" onclick="banForm()">O‘yinchini ban qilish</button>
+  `);
+ } catch(e) {toast(e.message)}
+}
+
+async function adminRooms() {
+ try {
+  const j=await api('admin_rooms');
+  openModal(
+   '<h2>Barcha xonalar</h2>'+
+   ((j.rooms||[]).map(r=>
+    `<div class="rowline">#${r.room_code} — ${r.status}<br>
+    <button class="action" onclick="closeRoom('${r.id}')">Yopish</button></div>`
+   ).join('')||'Xonalar yo‘q')
+  );
+ } catch(e) {toast(e.message)}
+}
+
+async function closeRoom(id) {
+ try {
+  await api('admin_close_room',{room_id:id});
+  toast('Xona yopildi');
+  adminRooms();
+ } catch(e) {toast(e.message)}
+}
+
+async function adminBans() {
+ try {
+  const j=await api('admin_bans');
+  openModal(
+   '<h2>Ban ro‘yxati</h2>'+
+   ((j.bans||[]).map(b=>
+    `<div class="rowline">ID: ${b.telegram_user_id}<br>
+    ${b.reason||''}<br>
+    <button class="action" onclick="unban('${b.telegram_user_id}')">Ban olib tashlash</button></div>`
+   ).join('')||'Banlar yo‘q')
+  );
+ } catch(e) {toast(e.message)}
+}
+
+async function unban(id) {
+ try {
+  await api('admin_unban',{telegram_user_id:id});
+  toast('Ban olib tashlandi');
+  adminBans();
+ } catch(e) {toast(e.message)}
+}
+
+function banForm() {
+ openModal(`
+  <h2>O‘yinchini ban qilish</h2>
+  <input id="banId" inputmode="numeric" placeholder="Telegram ID">
+  <input id="banReason" placeholder="Sabab">
+  <button class="action" onclick="banPlayer()">Ban qilish</button>
+ `);
+}
+
+async function banPlayer() {
+ try {
+  await api('admin_ban',{
+   telegram_user_id:document.getElementById('banId').value.trim(),
+   reason:document.getElementById('banReason').value.trim()
+  });
+  toast('Ban qo‘yildi');
+  adminBans();
+ } catch(e) {toast(e.message)}
+}
+
+async function openShop() {
+ try {
+  const j=await api('gifts');
+  openModal(
+   '<h2>Sovg‘alar</h2>'+
+   ((j.gifts||[]).map(g=>
+    `<div class="rowline">${g.emoji||'🎁'} ${g.name} — ${g.price_coins} coin</div>`
+   ).join('')||'Hozircha sovg‘alar yo‘q')
+  );
+ } catch(e) {toast(e.message)}
+}
+
+(async()=>{
+ if(!tg?.initData) {
+  toast('Mini Appni Telegram ichidan oching');
+  return;
+ }
+ try {
+  const j=await api('me');
+  me=j.user;
+  if(j.is_owner)toast('OWNER sifatida kirdingiz');
+ } catch(e) {toast(e.message)}
+})();
+</script>
+</body>
+</html>
